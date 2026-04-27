@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Heartfelt Echoes - Digital Scrapbook</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Noto Serif for headlines, Newsreader for body, and a cursive for the letter -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Newsreader:ital,wght@0,400;0,600;1,400&amp;family=Dancing+Script:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-variant": "#e4e3db",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface-container-highest": "#e4e3db",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f3f1e9",
+                        "surface": "#fbf9f1",
+                        "on-secondary-fixed": "#241a00",
+                        "primary-container": "#dcae96",
+                        "surface-tint": "#7a5642",
+                        "tertiary": "#855324",
+                        "tertiary-fixed": "#ffdcc1",
+                        "outline-variant": "#d4c3bb",
+                        "tertiary-container": "#eaaa73",
+                        "secondary": "#735c00",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#745c00",
+                        "inverse-primary": "#ecbda4",
+                        "tertiary-fixed-dim": "#fbb980",
+                        "surface-container": "#f0eee6",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcdad2",
+                        "on-tertiary-fixed": "#2e1500",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary-container": "#6a3d0f",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1b1c17",
+                        "on-surface-variant": "#50443e",
+                        "secondary-container": "#fed65b",
+                        "primary": "#7a5642",
+                        "surface-bright": "#fbf9f1",
+                        "surface-container-low": "#f5f4ec",
+                        "on-background": "#1b1c17",
+                        "on-primary-fixed": "#2e1506",
+                        "inverse-surface": "#30312c",
+                        "on-primary-container": "#62412e",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fbf9f1",
+                        "on-tertiary-fixed-variant": "#693c0e",
+                        "on-primary-fixed-variant": "#603f2d",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#eae8e0",
+                        "primary-fixed": "#ffdbca",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#ecbda4",
+                        "outline": "#82746d",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter-canvas": "24px",
+                        "stack-md": "24px",
+                        "stack-sm": "12px",
+                        "margin-page": "40px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Newsreader"],
+                        "label-sm": ["Newsreader"],
+                        "headline-lg": ["Noto Serif"],
+                        "display-handwritten": ["Dancing Script", "cursive"]
+                    },
+                    "fontSize": {
+                        "body-md": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "display-handwritten": ["48px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.paper-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC9sPyHxcS35EjV_eEyS9eYza9hDRkE65ZR0uIvxKe2gaXHanKuY6hQHrRqv9dvhGo-QFWJmfRDniFH0J_Iz2Xk2Hn8oM1nHdx7FMnxL4rhapBlPYu-Ugl0KoANRDHuNvX3bC9VUWcfMP5jwv7KRGRoS_3I904EAmn5btaSpFxb-7tRWJhqjw_oMN7OpMLlgt2JRp7_DhPT99H7Wv-ak5NUuecEvcfC7wSAGT5jTHRavWJNKasFypK-llNNMfTxQ5s0JTCh77sQb6ff)
+    }
+.wood-texture {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url(https://www.transparenttextures.com/patterns/wood-pattern-light.png);
+    background-color: #f5f4ec
+    }
+.glass-effect {
+    backdrop-filter: blur(8px);
+    background: rgba(251, 249, 241, 0.7)
+    }
+.washi-tape {
+    background-color: #dcae96;
+    opacity: 0.6;
+    mask-image: url(https://www.transparenttextures.com/patterns/handmade-paper.png)
+    }
+.letter-spacing-tight {
+    letter-spacing: -0.02em
+    }
+.shadow-scrapbook {
+    shadow: 0 20px 50px rgba(0, 0, 0, 0.15)
+    }
+.floating-petals {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 100
+    }
+.petal {
+    position: absolute;
+    background: #dcae96;
+    width: 12px;
+    height: 18px;
+    border-radius: 50% 0 50% 50%;
+    opacity: 0.4
+    }</style>
+</head>
+<body class="bg-background font-body-md text-on-background overflow-hidden h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-12 py-4 bg-[#fdfaf6] dark:bg-[#1a1614] shadow-sm shadow-[0_1px_5px_rgba(220,174,150,0.1)] z-50">
+<div class="font-serif text-2xl font-semibold text-[#8c6a5a] dark:text-[#DCAE96]">Heartfelt Echoes</div>
+<nav class="hidden md:flex space-x-8">
+<a class="font-serif italic text-lg text-[#bca498] hover:text-[#8c6a5a] hover:opacity-80 transition-opacity" href="#">Our Story</a>
+<a class="font-serif italic text-lg text-[#8c6a5a] border-b-2 border-[#DCAE96] pb-1 hover:opacity-80 transition-opacity" href="#">Timeline</a>
+<a class="font-serif italic text-lg text-[#bca498] hover:text-[#8c6a5a] hover:opacity-80 transition-opacity" href="#">Gallery</a>
+</nav>
+<div class="flex items-center space-x-6">
+<span class="material-symbols-outlined text-[#DCAE96] cursor-pointer hover:opacity-80 transition-opacity" data-icon="music_note">music_note</span>
+<span class="material-symbols-outlined text-[#DCAE96] cursor-pointer hover:opacity-80 transition-opacity" data-icon="share">share</span>
+</div>
+</header>
+<!-- Main Canvas (The Desk) -->
+<main class="relative flex-grow wood-texture flex items-center justify-center p-8 overflow-hidden">
+<!-- Subtle Glimmer Light -->
+<div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-black/5 pointer-events-none"></div>
+<!-- Navigation Arrows (Champagne Gold) -->
+<button class="absolute left-12 z-40 text-[#dcae96] opacity-60 hover:opacity-100 transition-all active:scale-95">
+<span class="material-symbols-outlined text-6xl" style="font-variation-settings: 'wght' 200;">arrow_back_ios</span>
+</button>
+<button class="absolute right-12 z-40 text-[#dcae96] opacity-60 hover:opacity-100 transition-all active:scale-95">
+<span class="material-symbols-outlined text-6xl" style="font-variation-settings: 'wght' 200;">arrow_forward_ios</span>
+</button>
+<!-- The Scrapbook -->
+<div class="relative w-full max-w-6xl aspect-[1.4/1] bg-surface-container-low rounded-lg shadow-2xl flex p-4 ring-1 ring-black/5">
+<!-- Spine Area -->
+<div class="absolute left-1/2 top-0 bottom-0 w-8 -ml-4 bg-gradient-to-r from-black/5 via-black/10 to-black/5 z-20"></div>
+<!-- Left Page: Timeline -->
+<div class="relative flex-1 bg-surface-container-lowest paper-texture rounded-l-md shadow-inner-lg p-12 overflow-hidden border-r border-outline-variant/30">
+<!-- Timeline Thread -->
+<div class="absolute left-16 top-12 bottom-12 w-[1px] bg-primary/20"></div>
+<h2 class="font-headline-lg text-primary italic mb-12 relative z-10">Captured Moments</h2>
+<div class="space-y-16 relative z-10">
+<!-- Memory 1 -->
+<div class="flex items-start gap-8 transform -rotate-1">
+<div class="w-24 text-right pt-2">
+<span class="font-display-handwritten text-2xl text-on-surface-variant">Aug 14</span>
+</div>
+<div class="relative group">
+<div class="absolute -top-3 left-4 w-12 h-4 washi-tape -rotate-12 z-10"></div>
+<div class="bg-white p-2 pb-8 shadow-md transform group-hover:scale-105 transition-transform">
+<img alt="The first meeting" class="w-40 h-40 object-cover grayscale-[0.3]" data-alt="Vintage style polaroid photo of two people sitting on a park bench under a large oak tree in soft summer light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKoL6XGhimeVDe0SA6mSjdn0w1G5AbOrECTeK8YuzHddXp2XB1-o2NIJvMUp6tJV8DK9AUKqZ3PS7PwgGEyr8sN3wtxSc7RuRpue0Fy6-AotedVrm7sUWs-OeqthRdnoSLyX8znv7AWCq6WUlHa_oagVqx3Pckr3-ymuNMdW8ShZe-kAdjQnDJO2sncVze0eJ2ZEnV35ely8JIayDTQY7ErWxvmRED45G7OMKBa50Y0BMg3YKJmS2xUVIGq6VsUx2sz6TItNZ4Tr4z"/>
+<p class="font-display-handwritten text-center mt-2 text-on-surface-variant">Our first coffee</p>
+</div>
+</div>
+</div>
+<!-- Memory 2 -->
+<div class="flex items-start gap-8 transform rotate-2 ml-12">
+<div class="w-24 text-right pt-2">
+<span class="font-display-handwritten text-2xl text-on-surface-variant">Sept 02</span>
+</div>
+<div class="relative">
+<div class="absolute -top-4 right-4 w-14 h-4 bg-on-secondary-fixed-variant/20 -rotate-45 z-10"></div>
+<div class="bg-white p-2 pb-8 shadow-md">
+<img alt="Autumn walk" class="w-48 h-32 object-cover sepia-[0.2]" data-alt="Candid photo of hands holding autumn leaves against a background of golden forest light and blurry trees" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy-Oxmt6rDAOkt3bD99ymUkTMR1yXhrnx2u-nBoZU_dZbqSVP2VPXfuOkI_63DCLOAvaLtixYd78mRV2qeeqUq-Z2DajNyot4btSfU6BHLjZFfRvwQRhMefBzsF8XDg9T5VEAVWZAwBK3t4n_HkZNQWscFVchjhSZR_J7T2bdR3UV_1XtnRJEQriZa6eQ__pnUGfhdAMxpEGOhn-heOT2HFno4_kOTO6OTA7HErjT04sQHQL6VwpLc6Lez_zS4pTXSNzqy0wvowMn1"/>
+<p class="font-display-handwritten text-center mt-2 text-on-surface-variant">Golden hour whispers</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Pressed Flowers -->
+<div class="absolute bottom-4 left-6 opacity-60 transform scale-125">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="local_florist">local_florist</span>
+</div>
+<div class="absolute top-6 right-6 opacity-40 rotate-180">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="spa">spa</span>
+</div>
+</div>
+<!-- Right Page: Love Letter -->
+<div class="relative flex-1 bg-surface-container-lowest paper-texture rounded-r-md p-16 flex flex-col items-center">
+<!-- Gold Stamped Heart -->
+<div class="absolute top-12 right-12 text-[#e9c349]/40">
+<span class="material-symbols-outlined text-5xl" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<div class="max-w-md w-full">
+<p class="font-display-handwritten text-3xl text-primary-fixed-dim italic mb-8">My Dearest,</p>
+<div class="font-display-handwritten text-2xl text-on-primary-fixed-variant space-y-6 leading-relaxed">
+<p>I find myself returning to these pages, much like I return to the memory of you. There is a quiet magic in the way the light hit the kitchen tiles this morning, reminding me of that first summer we spent together.</p>
+<p>Every small note, every petal pressed between these sheets, it's all a testament to the life we've built—one gentle breath at a time. I hope you feel the warmth of these words, even across the distance.</p>
+<p>You are the echo in my heart that never fades.</p>
+</div>
+<p class="font-display-handwritten text-3xl text-primary-fixed-dim italic mt-12 text-right">Always yours,</p>
+<p class="font-display-handwritten text-3xl text-on-primary-fixed-variant text-right">E.</p>
+</div>
+<!-- Gold Stamped Motifs -->
+<div class="absolute bottom-16 left-12 text-[#e9c349]/30">
+<span class="material-symbols-outlined text-2xl" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="absolute bottom-12 right-24 text-[#e9c349]/30">
+<span class="material-symbols-outlined text-2xl" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+</div>
+<!-- Floating Petals Layer -->
+<div class="floating-petals">
+<div class="petal top-[10%] left-[20%] rotate-45"></div>
+<div class="petal top-[40%] left-[80%] -rotate-12"></div>
+<div class="petal top-[70%] left-[10%] rotate-90"></div>
+<div class="petal top-[20%] left-[60%] rotate-180"></div>
+<div class="petal top-[85%] left-[45%] rotate-12"></div>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on Mobile, but defined for consistency) -->
+<footer class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-[#fdfaf6]/90 backdrop-blur-md border-t border-[#ede0d4] shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col items-center justify-center text-[#bca498] px-6 py-1 hover:text-[#DCAE96] transition-colors">
+<span class="material-symbols-outlined" data-icon="book_2">book_2</span>
+<span class="text-[11px] font-serif uppercase tracking-widest">Cover</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8c6a5a] bg-[#DCAE96]/10 rounded-full px-6 py-1 hover:text-[#DCAE96] transition-colors">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="text-[11px] font-serif uppercase tracking-widest">Chapters</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#bca498] px-6 py-1 hover:text-[#DCAE96] transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="text-[11px] font-serif uppercase tracking-widest">Memories</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#bca498] px-6 py-1 hover:text-[#DCAE96] transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[11px] font-serif uppercase tracking-widest">Settings</span>
+</div>
+</footer>
+</body></html>

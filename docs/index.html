@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartfelt Echoes - Ssam & Jose</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7a5642;
+            --secondary: #dcae96;
+            --accent: #e9c349;
+            --bg: #fbf9f1;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wood-texture {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)),
+                url('https://www.transparenttextures.com/patterns/wood-pattern-light.png');
+            background-color: #f5f4ec;
+        }
+
+        .paper-texture {
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            background-color: #fffdf5;
+        }
+
+        .book-container {
+            perspective: 2000px;
+            width: 95vw;
+            max-width: 1100px;
+            height: 80vh;
+            max-height: 750px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .page {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform-origin: left;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .page-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            padding: 40px;
+            box-shadow: inset 3px 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .page-front {
+            z-index: 2;
+            background: #fffdf5;
+        }
+
+        .page-back {
+            transform: rotateY(-180deg);
+            background: #fffdf5;
+            border-radius: 15px 0 0 15px;
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .serif {
+            font-family: 'Noto Serif', serif;
+        }
+
+        .washi-tape {
+            position: absolute;
+            height: 35px;
+            background: rgba(220, 174, 150, 0.7);
+            padding: 2px 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+            color: white;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-3deg);
+            mask-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px 10px 40px 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: rotate(2deg);
+            transition: transform 0.3s;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .spine {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            margin-left: -30px;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent 20%, transparent 80%, rgba(0, 0, 0, 0.15));
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .floating-petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: #f8bbd0;
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.6;
+            animation: drift 10s linear infinite;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(110vh) translateX(100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            animation: heart-pop 1.2s ease-out forwards;
+        }
+
+        @keyframes heart-pop {
+            0% {
+                transform: scale(0.5) translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5) translateY(-150px) translateX(var(--tx));
+                opacity: 0;
+            }
+        }
+
+        .nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(220, 174, 150, 0.2);
+            border: none;
+            color: var(--primary);
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 100;
+            padding: 20px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(220, 174, 150, 0.4);
+        }
+
+        #prevBtn {
+            left: 20px;
+        }
+
+        #nextBtn {
+            right: 20px;
+        }
+
+        .song-card {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(220, 174, 150, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+            transition: transform 0.2s;
+        }
+
+        .song-card:hover {
+            transform: translateX(5px);
+            background: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 10px;
+        }
+
+        /* Modal Styles */
+        #modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        #modalContent {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .zoomable {
+            cursor: zoom-in;
+        }
+
+        iframe {
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body class="wood-texture">
+
+    <div class="floating-petals" id="petals"></div>
+
+    <button id="prevBtn" class="nav-btn">&lsaquo;</button>
+    <button id="nextBtn" class="nav-btn">&rsaquo;</button>
+
+    <!-- Modal for Lightbox and Video -->
+    <div id="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <div id="modalContent" onclick="event.stopPropagation()">
+            <!-- Content injected via JS -->
+        </div>
+    </div>
+
+    <div class="book-container">
+        <div class="spine"></div>
+        <div class="book" id="book">
+
+            <!-- PAGE 1: COVER -->
+            <div class="page" style="z-index: 100;">
+                <div class="page-content page-front paper-texture items-center justify-center text-center">
+                    <div class="washi-tape top-8 left-10">Para Ssamira</div>
+                    <h1 class="cursive text-7xl text-primary mb-6">Nuestra Historia</h1>
+                    <p class="serif italic text-secondary text-xl">Por siempre en mi corazón</p>
+                    <div class="mt-12 polaroid zoomable" onclick="openLightbox('ssamy.jpg')">
+                        <img src="ssamy.jpg" class="w-64 h-64 object-cover" alt="Ssamira">
+                        <p class="cursive text-2xl mt-4 text-gray-700">Eres mi luz eterna</p>
+                    </div>
+                </div>
+                <div class="page-content page-back paper-texture flex flex-col justify-center">
+                    <h2 class="cursive text-4xl text-primary mb-8 text-center">Un suspiro para ti</h2>
+                    <div class="serif italic text-lg leading-relaxed text-gray-600 text-center px-4">
+                        <p>"Eres el motivo de mi sonrisa, puedes ser mi calma? :c..."</p>
+                        <p class="mt-6 text-sm">Escrito con todo el amor de mi alma.</p>
+                    </div>
+                    <div class="flex justify-center mt-12 text-secondary text-5xl">&hearts;</div>
+                </div>
+            </div>
+
+            <!-- PAGE 2: LETTER 1 -->
+            <div class="page" style="z-index: 99;">
+                <div class="page-content page-front paper-texture">
+                    <h2 class="cursive text-4xl text-primary mb-6">Desde mi corazón...</h2>
+                    <div class="serif text-sm leading-relaxed text-gray-700 overflow-y-auto pr-2">
+                        <p>A pesar de todo lo malo, sabrás que luego viene algo bueno, y es ahí cuando te darás cuenta
+                            que todo valió la pena. Yo estaré aquí para ti, realmente quiero estar aquí para ti, te amo
+                            y no sabes cuánto...</p>
+                        <p class="mt-4">Jamás digas que lo estás arruinando porque sabes que diré que es mi culpa, hoy
+                            te tengo aquí, y me agrada que estés a mi lado. Por favor no te vayas jamás, eres todo lo
+                            que yo amo.</p>
+                        <p class="mt-4">Escribo esto porque últimamente me siento un poco triste por las cosas que
+                            probablemente estoy provocando. Sabes que debería comprenderte aún más, quizás a veces
+                            pierdo un poco la paciencia, pero no quiero perderte.</p>
+                    </div>
+                </div>
+                <div class="page-content page-back paper-texture">
+                    <div class="serif text-sm leading-relaxed text-gray-700 overflow-y-auto pr-2">
+                        <p>Realmente me enamoré demasiado de ti, por favor solo resiste un poco más de todo este
+                            desastre que pasa, yo luego te haré sonreír demasiado. Perdóname por las veces que dije o
+                            hice cosas que te hicieron sentir mal.</p>
+                        <p class="mt-4">Dije que yo me encargo cuando te hacía sentir mal, también necesito que me
+                            tiendas la mano, sé que lo haces. Me siento inútil a veces cuando te veo triste, y ni sé qué
+                            cosas hacer para poder hacerte reír.</p>
+                        <p class="mt-4">A veces solo pienso en decir cosas estúpidas para poder hacerte reír... estamos
+                            juntos en esto, amor. Te dije que no te soltaría y no lo haré.</p>
+                        <div class="mt-6 flex justify-center scale-110">
+                            <img src="https://static.vecteezy.com/system/resources/previews/025/279/124/non_2x/sunflower-bouquet-illustration-decor-png.png"
+                                class="w-16" alt="decor">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 3: SONGS -->
+            <div class="page" style="z-index: 98;">
+                <div class="page-content page-front paper-texture">
+                    <div class="washi-tape top-4 right-8">Nuestras Canciones</div>
+                    <h2 class="cursive text-4xl text-primary mb-8 mt-4">Nuestra Playlist</h2>
+                    <div class="song-card">
+                        <p class="font-bold text-gray-800 text-sm">1. Amapolas - Leo Rizzi</p>
+                        <p class="text-[10px] text-gray-600 mb-1">Te lo canté por primera vez, me agrada verte sonreír,
+                            eres todo para mí...</p>
+                        <p class="text-[10px] text-secondary italic mb-2">"Tú y yo bailando al rededor del río..."</p>
+                        <button onclick="openVideo('SmF4wY7U7QE')"
+                            class="text-[10px] text-accent font-bold hover:underline">Previsualizar Video
+                            &rarr;</button>
+                    </div>
+                    <div class="song-card">
+                        <p class="font-bold text-gray-800 text-sm">2. Unstable - Justin Bieber</p>
+                        <p class="text-[10px] text-gray-600 mb-1">Recuerdas los momentos en los que te sentías mal, todo
+                            fue un proceso...</p>
+                        <p class="text-[10px] text-secondary italic mb-2">"Nunca te abandoné, tú eres mi paz mental."
+                        </p>
+                        <button onclick="openVideo('Od56K7yEJes')"
+                            class="text-[10px] text-accent font-bold hover:underline">Previsualizar Video
+                            &rarr;</button>
+                    </div>
+                </div>
+                <div class="page-content page-back paper-texture">
+                    <div class="song-card mt-4">
+                        <p class="font-bold text-gray-800 text-sm">5. Mi historia entre tus dedos</p>
+                        <p class="text-[10px] text-gray-600 mb-1">Conozco tu sonrisa tan definitiva, tu sonrisa que a mí
+                            mismo me abrió tu paraíso...</p>
+                        <button onclick="openVideo('n_HS7zmkZWQ')"
+                            class="text-[10px] text-accent font-bold hover:underline">Previsualizar Video
+                            &rarr;</button>
+                    </div>
+                    <div class="song-card">
+                        <p class="font-bold text-gray-800 text-sm">7. La Cosa Más Bella</p>
+                        <p class="text-[10px] text-gray-600 mb-1">Cantar al amor ya no bastará, es poco para mí...</p>
+                        <button onclick="openVideo('hGpMeO1FHFs')"
+                            class="text-[10px] text-accent font-bold hover:underline">Previsualizar Video
+                            &rarr;</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 4: CERTIFICADO -->
+            <div class="page" style="z-index: 97;">
+                <div class="page-content page-front paper-texture items-center">
+                    <h2 class="cursive text-4xl text-primary mb-6">Nuestro Pacto</h2>
+                    <div class="w-full shadow-lg border-8 border-white p-1 zoomable" onclick="openLightbox('2.png')">
+                        <img src="2.png" class="w-full" alt="Certificado">
+                    </div>
+                    <p class="cursive text-2xl mt-4 text-secondary text-center">Mi esposa amada (Click para ampliar)</p>
+                </div>
+                <div class="page-content page-back paper-texture">
+                    <h2 class="cursive text-4xl text-primary mb-8">Un Poema Eterno</h2>
+                    <div class="cursive text-xl leading-relaxed text-gray-800 italic space-y-4">
+                        <p>En el lienzo de mi vida, tú eres el color,</p>
+                        <p>la melodía dulce que calma mi dolor.</p>
+                        <p>Niñita mía, esposa, mi eterna compañera,</p>
+                        <p>tu amor es el fuego de mi primavera.</p>
+                        <hr class="border-secondary/20 w-1/2 mx-auto">
+                        <p>Aunque el mundo sea un desastre y el cielo esté gris,</p>
+                        <p>basta ver tu sonrisa para hacerme feliz.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 5: FLORES AMARILLAS (IFRAME) -->
+            <div class="page" style="z-index: 96;">
+                <div class="page-content page-front paper-texture">
+                    <h2 class="cursive text-4xl text-primary mb-4 text-center">Tus Flores Amarillas</h2>
+                    <div class="relative flex-grow">
+                        <iframe src="ssam_flor/flower/flores_amarillas_para_ti.html" class="w-full h-full border-none" loading="lazy"></iframe>
+                    </div>
+                    <p class="cursive text-center mt-2 text-secondary text-sm">Interactivo</p>
+                </div>
+                <div class="page-content page-back paper-texture">
+                    <h2 class="cursive text-4xl text-primary mb-4 text-center">¡Feliz Cumpleaños!</h2>
+                    <div class="relative flex-grow">
+                        <iframe src="ssam_flor/tarjeta/feliz_cumple_mi_niñita.html" class="w-full h-full border-none" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 6: FINAL -->
+            <div class="page" style="z-index: 95;">
+                <div class="page-content page-front paper-texture items-center justify-center text-center">
+                    <h2 class="cursive text-6xl text-primary mb-8">Te Amo Infinito</h2>
+                    <p class="serif italic text-lg text-gray-600 mb-12">"Tú y yo por siempre, contra todo pronóstico."
+                    </p>
+                    <div class="text-accent text-7xl animate-bounce">&hearts;</div>
+                </div>
+                <div class="page-content page-back paper-texture items-center justify-center">
+                    <h2 class="cursive text-4xl text-gray-400">FIN</h2>
+                    <button onclick="window.location.reload()"
+                        class="mt-8 text-xs tracking-widest text-secondary hover:underline">VOLVER A LEER</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const book = document.getElementById('book');
+        const pages = document.querySelectorAll('.page');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modalContent');
+        let currentIdx = 0;
+
+        function updatePages() {
+            pages.forEach((page, index) => {
+                if (index < currentIdx) {
+                    page.classList.add('flipped');
+                    page.style.zIndex = index + 1;
+                } else {
+                    page.classList.remove('flipped');
+                    page.style.zIndex = pages.length - index;
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', (e) => {
+            if (currentIdx < pages.length) {
+                currentIdx++;
+                updatePages();
+                createHearts(e.clientX, e.clientY);
+            }
+        });
+
+        prevBtn.addEventListener('click', (e) => {
+            if (currentIdx > 0) {
+                currentIdx--;
+                updatePages();
+            }
+        });
+
+        pages.forEach((page, index) => {
+            page.addEventListener('click', (e) => {
+                if (e.target.closest('button') || e.target.closest('.zoomable') || e.target.closest('iframe') || e.target.closest('a')) return;
+
+                if (index === currentIdx) {
+                    currentIdx++;
+                    updatePages();
+                    createHearts(e.clientX, e.clientY);
+                } else if (index === currentIdx - 1) {
+                    currentIdx--;
+                    updatePages();
+                }
+            });
+        });
+
+        function createHearts(x, y) {
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '&hearts;';
+                heart.className = 'heart text-red-400 text-3xl';
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.setProperty('--tx', (Math.random() * 200 - 100) + 'px');
+                heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1200);
+            }
+        }
+
+        function createPetals() {
+            const container = document.getElementById('petals');
+            for (let i = 0; i < 30; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDelay = Math.random() * 10 + 's';
+                petal.style.animationDuration = (8 + Math.random() * 10) + 's';
+                container.appendChild(petal);
+            }
+        }
+        createPetals();
+
+        function openLightbox(src) {
+            modalContent.innerHTML = `<img src="${src}" class="max-w-full max-h-[85vh] shadow-2xl border-4 border-white">`;
+            modal.style.display = 'flex';
+        }
+
+        function openVideo(videoId) {
+            modalContent.innerHTML = `
+                <div class="flex flex-col items-center">
+                    <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen class="w-[90vw] max-w-[800px] aspect-video shadow-2xl">
+                    </iframe>
+                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" 
+                       class="mt-4 text-white hover:text-accent underline text-sm">
+                       ¿No carga el video? Haz clic aquí para verlo en YouTube
+                    </a>
+                </div>`;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            modalContent.innerHTML = '';
+        }
+    </script>
+</body>
+
+</html>
