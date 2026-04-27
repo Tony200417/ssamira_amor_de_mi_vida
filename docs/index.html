@@ -49,6 +49,7 @@
             max-height: 750px;
             position: relative;
             z-index: 10;
+            transition: transform 0.5s;
         }
 
         .book {
@@ -69,6 +70,7 @@
             transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
             z-index: 1;
             cursor: pointer;
+            user-select: none;
         }
 
         .page-content {
@@ -78,11 +80,37 @@
             top: 0;
             left: 0;
             backface-visibility: hidden;
-            padding: 40px;
+            padding: 5% 8%;
             box-shadow: inset 3px 0 20px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             border-radius: 0 15px 15px 0;
+            overflow: hidden;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            .book-container {
+                height: 60vh;
+                max-height: 500px;
+            }
+            .page-content {
+                padding: 20px;
+            }
+            .nav-btn {
+                padding: 10px;
+                font-size: 2rem;
+            }
+            h1 { font-size: 3rem !important; }
+            h2 { font-size: 1.8rem !important; }
+        }
+
+        @media (max-width: 480px) {
+            .book-container {
+                width: 140vw; /* Stretch to allow more space when scaled */
+                left: -20vw;
+                transform: scale(0.6);
+            }
         }
 
         .page-front {
